@@ -1,2 +1,1 @@
-# Steuertools
-Steuerrechner für Deutschland — GmbH vs. Einzelunternehmen
+# GmbH vs. Einzelunternehmen - Steuerrechner für Deutschland
