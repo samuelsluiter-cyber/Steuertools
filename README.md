@@ -3,7 +3,9 @@ GmbH vs. Einzelunternehmen — Steuerrechner für Deutschland
 Live: samuelsluiter-cyber.github.io/Steuertools/steuerrechner.html
 
 Steuerrechtlicher Hintergrund
+
 Warum ist der Vergleich komplex?
+
 Beim Einzelunternehmen unterliegt der gesamte Gewinn der progressiven Einkommensteuer (14%–45%). Die Gewerbesteuer wird jedoch nach § 35 EStG pauschal angerechnet, was die tatsächliche Belastung erheblich reduziert.
 Bei der GmbH fällt zunächst nur die Flat-Tax aus Körperschaftsteuer und Gewerbesteuer (~30%) an. Erst bei der Ausschüttung an den Gesellschafter kommt die Abgeltungsteuer (25%) hinzu, was die Gesamtbelastung auf ~48–50% erhöht.
 Wann lohnt sich die GmbH?
