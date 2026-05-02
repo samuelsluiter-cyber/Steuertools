@@ -3,515 +3,918 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GmbH vs. Einzelunternehmen — Steuerrechner 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Steuerrechner 2026 — GmbH vs. Einzelunternehmen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d0d0d; --bg2: #141414; --bg3: #1c1c1c;
-  --border: rgba(255,255,255,0.06); --border2: rgba(255,255,255,0.12);
-  --gold: #c9a84c; --gold2: #e8c96a;
-  --text: #f0ede8; --text2: #8a8680; --text3: #4a4845;
-  --green: #4caf82; --red: #e05c5c; --blue: #5c9ce0; --orange: #e09a3a;
+  --bg: #f5f5f7;
+  --bg2: #ffffff;
+  --bg3: #fafafa;
+  --border: rgba(0,0,0,0.06);
+  --border2: rgba(0,0,0,0.10);
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --text3: #aeaeb2;
+  --gold: #b8860b;
+  --gold-light: #f5f0e0;
+  --green: #1a7f5a;
+  --green-light: #e8f5f0;
+  --blue: #0a5eb5;
+  --blue-light: #e5f0fb;
+  --red: #c0392b;
+  --orange: #c05c00;
+  --shadow: 0 2px 20px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 10% 20%,rgba(201,168,76,0.04) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 90% 80%,rgba(92,156,224,0.03) 0%,transparent 60%);pointer-events:none;z-index:0;}
-.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 24px;}
+html{scroll-behavior:smooth;}
 
-header{padding:52px 0 40px;border-bottom:1px solid var(--border);margin-bottom:40px;}
-.header-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.header-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
-h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.15;margin-bottom:10px;}
-h1 span{color:var(--gold);}
-.subtitle{font-size:14px;color:var(--text2);line-height:1.6;max-width:540px;}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
 
-.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;}
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245,245,247,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.nav-brand span { color: var(--gold); }
+.nav-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+}
 
-.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.hero {
+  padding: 80px 0 64px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+h1 em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 17px;
+  color: var(--text2);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* CARD */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+/* INPUT SECTION */
+.input-card {
+  padding: 36px;
+  margin-bottom: 20px;
+}
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 20px;
+}
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
 @media(max-width:600px){.input-grid{grid-template-columns:1fr;}}
-.field{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;transition:border-color .2s;}
-.field:focus-within{border-color:var(--gold);}
-.field label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
-.field-inner{display:flex;align-items:center;gap:8px;}
-.field input,.field select{background:none;border:none;outline:none;color:var(--text);font-family:'DM Mono',monospace;font-size:17px;font-weight:500;width:100%;min-width:0;}
-.field input::placeholder{color:var(--text3);}
-.field-unit{font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);white-space:nowrap;}
-.field select option{background:#1c1c1c;}
-.slider-field{grid-column:1/-1;}
-input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--border2);border-radius:2px;outline:none;margin-top:4px;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 0 3px rgba(201,168,76,.15);}
+.field {
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,134,11,0.08);
+}
+.field label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.field-inner { display: flex; align-items: center; gap: 8px; }
+.field input, .field select {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  min-width: 0;
+}
+.field input::placeholder { color: var(--text3); }
+.field-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text3);
+  white-space: nowrap;
+}
+.field select option { background: #fff; }
+.slider-field { grid-column: 1/-1; }
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--border2);
+  border-radius: 2px;
+  outline: none;
+  margin-top: 6px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(184,134,11,0.25);
+}
 
-.calc-btn{width:100%;padding:15px;background:var(--gold);border:none;border-radius:8px;color:#0d0d0d;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:44px;}
-.calc-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.calc-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: -0.01em;
+}
+.calc-btn:hover { background: #333; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.calc-btn:active { transform: translateY(0); }
 
-#results{display:none;}
-#results.show{display:block;animation:fadeUp .4s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+/* RESULTS */
+#results { display: none; }
+#results.show { display: block; animation: fadeUp 0.5s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
 
-/* Breakeven Banner */
-.breakeven-banner{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.be-icon{font-size:24px;}
-.be-text{flex:1;}
-.be-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.be-sub{font-size:12px;color:var(--text2);}
-.be-value{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--gold);white-space:nowrap;}
+/* BREAKEVEN */
+.breakeven-card {
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #fffdf5 0%, #fff 100%);
+  border-color: rgba(184,134,11,0.2);
+}
+.be-icon { font-size: 32px; }
+.be-body { flex: 1; }
+.be-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.be-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.be-sub { font-size: 13px; color: var(--text2); }
+.be-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+}
 
-/* Winner */
-.results-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px;}
-.results-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;}
-.winner-badge{font-family:'DM Mono',monospace;font-size:11px;padding:5px 12px;border-radius:4px;letter-spacing:.08em;}
-.winner-badge.eu{background:rgba(76,175,130,.15);color:var(--green);}
-.winner-badge.gmbh{background:rgba(92,156,224,.15);color:var(--blue);}
+/* WINNER ROW */
+.winner-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.winner-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+.winner-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+.winner-badge.eu { background: var(--green-light); color: var(--green); }
+.winner-badge.gmbh { background: var(--blue-light); color: var(--blue); }
 
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
-@media(max-width:600px){.info-grid{grid-template-columns:1fr;}}
-.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
-.info-card-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
-.info-card-value{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--gold);}
-.info-card-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+/* STAT PILLS */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media(max-width:600px){.stat-row{grid-template-columns:1fr;}}
+.stat-pill {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.stat-pill-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 5px;
+}
+.stat-pill-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+}
+.stat-pill-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
 
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+/* COMPARE CARDS */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
 @media(max-width:600px){.compare-grid{grid-template-columns:1fr;}}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px;position:relative;overflow:hidden;}
-.card.winner{border-color:var(--gold);}
-.card.winner::before{content:'★ GÜNSTIGER';position:absolute;top:11px;right:11px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 8px;border-radius:3px;}
-.card-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
-.card-total{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;margin-bottom:3px;}
-.card-total.eu{color:var(--green);}
-.card-total.gmbh{color:var(--blue);}
-.card-subtitle{font-size:12px;color:var(--text2);margin-bottom:18px;}
-.tax-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.tax-row:last-child{border-bottom:none;}
-.tax-row-label{color:var(--text2);}
-.tax-row-value{font-family:'DM Mono',monospace;font-size:12px;}
-.tax-row-value.neg{color:var(--red);}
-.tax-row-value.pos{color:var(--green);}
-.tax-row-value.hi{color:var(--gold);font-weight:500;}
 
-.rate-section{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:24px;}
-.rate-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:18px;}
-.rate-bars{display:flex;flex-direction:column;gap:14px;}
-.rate-bar-row{display:flex;flex-direction:column;gap:5px;}
-.rate-bar-label{display:flex;justify-content:space-between;font-size:13px;}
-.rate-bar-label span:first-child{color:var(--text2);}
-.rate-bar-track{height:4px;background:var(--border2);border-radius:4px;overflow:hidden;}
-.rate-bar-fill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1);}
-.rate-bar-fill.eu{background:var(--green);}
-.rate-bar-fill.gmbh{background:var(--blue);}
+.result-card {
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.result-card.winner {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+}
+.result-card.winner::after {
+  content: '★ Günstiger';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  background: var(--gold-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.rc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+.rc-total {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+.rc-total.eu { color: var(--green); }
+.rc-total.gmbh { color: var(--blue); }
+.rc-sub { font-size: 12px; color: var(--text2); margin-bottom: 18px; }
+.rc-divider { height: 1px; background: var(--border); margin: 14px 0; }
+.rc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 0;
+  font-size: 13px;
+}
+.rc-row-label { color: var(--text2); }
+.rc-row-value { font-family: 'DM Mono', monospace; font-size: 12px; }
+.rc-row-value.neg { color: var(--red); }
+.rc-row-value.pos { color: var(--green); }
+.rc-row-value.hi { color: var(--text); font-weight: 600; font-size: 14px; }
 
-/* Mehrjahres-Chart */
-.multi-section{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:24px;}
-.multi-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
-.multi-sub{font-size:12px;color:var(--text2);margin-bottom:20px;}
-.chart-wrap{overflow-x:auto;}
-.chart{min-width:500px;}
-.chart-bars{display:flex;align-items:flex-end;gap:6px;height:160px;padding:0 4px;}
-.bar-group{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
-.bar-pair{display:flex;gap:3px;align-items:flex-end;width:100%;}
-.bar{flex:1;border-radius:3px 3px 0 0;min-height:3px;transition:height .6s ease;cursor:pointer;position:relative;}
-.bar.eu-bar{background:var(--green);}
-.bar.gmbh-bar{background:var(--blue);}
-.bar:hover::after{content:attr(data-tip);position:absolute;bottom:105%;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;font-size:10px;font-family:'DM Mono',monospace;white-space:nowrap;color:var(--text);z-index:10;pointer-events:none;}
-.bar-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);text-align:center;}
-.chart-legend{display:flex;gap:16px;margin-top:12px;}
-.cleg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);}
-.cleg-dot{width:10px;height:10px;border-radius:2px;}
+/* RATE BARS */
+.rate-card { padding: 28px 32px; margin-bottom: 16px; }
+.rate-rows { display: flex; flex-direction: column; gap: 16px; }
+.rate-item { display: flex; flex-direction: column; gap: 6px; }
+.rate-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+.rate-item-name { color: var(--text2); }
+.rate-item-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+}
+.rate-track {
+  height: 5px;
+  background: var(--bg);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.rate-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+}
+.rate-fill.eu { background: var(--green); }
+.rate-fill.gmbh { background: var(--blue); }
+.rate-fill.thes { background: var(--orange); }
 
-/* Thesaurierungs-Hinweis */
-.thes-note{background:rgba(92,156,224,.06);border:1px solid rgba(92,156,224,.15);border-radius:8px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:var(--text2);line-height:1.6;display:none;}
-.thes-note.show{display:block;}
-.thes-note strong{color:var(--blue);}
+/* THES NOTE */
+.thes-note {
+  display: none;
+  background: var(--blue-light);
+  border: 1px solid rgba(10,94,181,0.15);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.thes-note.show { display: block; }
+.thes-note strong { color: var(--blue); }
 
-.insight{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:18px 22px;margin-bottom:28px;}
-.insight-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
-.insight p{font-size:13px;color:var(--text2);line-height:1.7;}
-.insight strong{color:var(--text);font-weight:500;}
+/* CHART */
+.chart-card { padding: 28px 32px; margin-bottom: 16px; }
+.chart-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.chart-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.chart-sub { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
+.chart-wrap { overflow-x: auto; }
+.chart-inner { min-width: 480px; }
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 160px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+.bar-group { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.bar-pair { display: flex; gap: 3px; align-items: flex-end; width: 100%; }
+.bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  min-height: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: opacity 0.15s;
+}
+.bar:hover { opacity: 0.8; }
+.bar:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+.bar.eu-bar { background: var(--green); }
+.bar.gmbh-bar { background: var(--blue); }
+.bar-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  text-align: center;
+}
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 14px;
+}
+.cleg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); }
+.cleg-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-.divider{height:1px;background:var(--border);margin:28px 0;}
-.disclaimer{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);line-height:1.6;padding-bottom:16px;}
+/* INSIGHT */
+.insight-card {
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fffdf5 0%, #fff 100%);
+  border-color: rgba(184,134,11,0.15);
+}
+.insight-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.insight-text {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.insight-text strong { color: var(--text); font-weight: 600; }
 
-footer{border-top:1px solid var(--border);padding:22px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:0;}
-.footer-name{font-family:'Playfair Display',serif;font-size:15px;color:var(--text2);}
-.footer-name span{color:var(--gold);}
-.footer-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.1em;}
+/* DISCLAIMER */
+.disclaimer {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.7;
+  text-align: center;
+  padding: 24px 0 8px;
+}
 
-.tooltip-wrap{position:relative;display:inline-block;}
-.tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;border:1px solid var(--text3);font-size:9px;color:var(--text3);cursor:help;margin-left:4px;vertical-align:middle;}
-.tooltip-text{display:none;position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--text2);width:200px;line-height:1.5;z-index:10;pointer-events:none;}
-.tooltip-wrap:hover .tooltip-text{display:block;}
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--text2);
+}
+.footer-name span { color: var(--gold); }
+.footer-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+}
+
+/* TOOLTIP */
+.tip { position: relative; display: inline-block; }
+.tip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--text3);
+  font-size: 9px;
+  color: var(--text3);
+  cursor: help;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.tip-text {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  width: 210px;
+  line-height: 1.5;
+  z-index: 20;
+  pointer-events: none;
+  font-family: 'DM Sans', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.tip:hover .tip-text { display: block; }
+
+.mb16 { margin-bottom: 16px; }
 </style>
 </head>
 <body>
+
+<nav>
+  <div class="nav-brand">Samuel <span>Sluiter</span> · Steuertools</div>
+  <div class="nav-tag">Rechtsstand 2026</div>
+</nav>
+
 <div class="wrap">
-<header>
-  <div class="header-tag">Steuerrechner · Deutschland · 2026</div>
-  <h1>GmbH vs. <span>Einzelunternehmen</span><br>Steuerbelastungsvergleich</h1>
-  <p class="subtitle">Vollständiger Vergleich inkl. Breakeven-Analyse, Mehrjahres-Thesaurierungseffekt und automatischem Kipppunkt. Rechtsstand 2026.</p>
-</header>
-
-<div class="section-label">Eingabe</div>
-<div class="input-grid">
-  <div class="field">
-    <label>Jahresgewinn (vor Steuern)</label>
-    <div class="field-inner">
-      <input type="number" id="gewinn" value="120000" min="0" max="10000000" step="1000" oninput="updateSlider()">
-      <span class="field-unit">€</span>
-    </div>
-  </div>
-  <div class="field">
-    <label>Hebesatz Gewerbesteuer <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-text">Ø Deutschland ~400%. Hamburg 470%, München 490%, Berlin 410%, Emden 380%.</span></span></label>
-    <div class="field-inner">
-      <input type="number" id="hebesatz" value="400" min="200" max="600" step="10">
-      <span class="field-unit">%</span>
-    </div>
-  </div>
-  <div class="field slider-field">
-    <label>Gewinn-Schieberegler: <span id="slider-label">120.000 €</span></label>
-    <input type="range" id="gewinn-slider" min="10000" max="1000000" step="5000" value="120000" oninput="syncSlider()">
-  </div>
-  <div class="field">
-    <label>Kirchensteuer</label>
-    <div class="field-inner">
-      <select id="kirchensteuer">
-        <option value="0">Keine</option>
-        <option value="0.09">9% (Standard)</option>
-        <option value="0.08">8% (Bayern/BaWü)</option>
-      </select>
-    </div>
-  </div>
-  <div class="field">
-    <label>Thesaurierung GmbH <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-text">Anteil des GmbH-Gewinns der einbehalten wird. Thesaurierte Gewinne unterliegen nicht der Abgeltungsteuer — erst bei späterer Ausschüttung.</span></span></label>
-    <div class="field-inner">
-      <input type="number" id="thesaurierung" value="0" min="0" max="100" step="10">
-      <span class="field-unit">%</span>
-    </div>
-  </div>
-  <div class="field">
-    <label>Betrachtungszeitraum (Jahre) <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-text">Für die Mehrjahres-Analyse: wie lange werden Gewinne thesauriert bevor sie ausgeschüttet werden?</span></span></label>
-    <div class="field-inner">
-      <input type="number" id="jahre" value="10" min="1" max="30" step="1">
-      <span class="field-unit">J</span>
-    </div>
-  </div>
-</div>
-
-<button class="calc-btn" onclick="calculate()">Steuerbelastung berechnen →</button>
-
-<div id="results">
-
-  <!-- Breakeven Banner -->
-  <div class="breakeven-banner">
-    <div class="be-icon">⚖️</div>
-    <div class="be-text">
-      <div class="be-title">Breakeven-Punkt (ohne Thesaurierung)</div>
-      <div class="be-sub" id="be-sub">Ab diesem Jahresgewinn wird die GmbH bei vollständiger Ausschüttung günstiger</div>
-    </div>
-    <div class="be-value" id="be-value">—</div>
+  <div class="hero">
+    <div class="hero-eyebrow">Steuerrechner · Deutschland · 2026</div>
+    <h1>GmbH vs.<br><em>Einzelunternehmen</em></h1>
+    <p class="hero-sub">Vollständiger Steuerbelastungsvergleich mit Breakeven-Analyse, Thesaurierungseffekt und Mehrjahres-Chart.</p>
   </div>
 
-  <div class="results-header">
-    <div class="results-title">Ergebnis für <span id="result-gewinn-label" style="color:var(--gold)">—</span></div>
-    <div class="winner-badge" id="winner-badge"></div>
-  </div>
-
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="info-card-label">Ersparnis</div>
-      <div class="info-card-value" id="info-ersparnis">—</div>
-      <div class="info-card-sub" id="info-ersparnis-sub">—</div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-label">Differenz Steuerquote</div>
-      <div class="info-card-value" id="info-diff-pct">—</div>
-      <div class="info-card-sub">Effektive Rate</div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-label">Netto EU</div>
-      <div class="info-card-value" id="info-netto-eu" style="color:var(--green)">—</div>
-      <div class="info-card-sub">verbleibend nach Steuern</div>
-    </div>
-  </div>
-
-  <div class="compare-grid">
-    <div class="card" id="card-eu">
-      <div class="card-title">Einzelunternehmen</div>
-      <div class="card-total eu" id="eu-total">—</div>
-      <div class="card-subtitle">Gesamtsteuerbelastung</div>
-      <div class="tax-breakdown">
-        <div class="tax-row"><span class="tax-row-label">Gewerbesteuer</span><span class="tax-row-value neg" id="eu-gew">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">§ 35 EStG Anrechnung</span><span class="tax-row-value pos" id="eu-anrechnung">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">Einkommensteuer + SolZ</span><span class="tax-row-value neg" id="eu-est">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">Kirchensteuer</span><span class="tax-row-value neg" id="eu-kist">—</span></div>
-        <div class="tax-row" style="border-top:1px solid var(--border2);margin-top:4px;padding-top:10px;border-bottom:none;"><span class="tax-row-label" style="color:var(--text)">Netto verbleibend</span><span class="tax-row-value hi" id="eu-netto">—</span></div>
+  <!-- INPUT -->
+  <div class="card input-card mb16">
+    <div class="section-label">Eingabe</div>
+    <div class="input-grid">
+      <div class="field">
+        <label>Jahresgewinn (vor Steuern)</label>
+        <div class="field-inner">
+          <input type="number" id="gewinn" value="120000" min="0" max="10000000" step="1000" oninput="updateSlider()">
+          <span class="field-unit">€</span>
+        </div>
       </div>
-    </div>
-    <div class="card" id="card-gmbh">
-      <div class="card-title">GmbH</div>
-      <div class="card-total gmbh" id="gmbh-total">—</div>
-      <div class="card-subtitle">Gesamtsteuerbelastung</div>
-      <div class="tax-breakdown">
-        <div class="tax-row"><span class="tax-row-label">KSt 15% + SolZ</span><span class="tax-row-value neg" id="gmbh-kst">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">Gewerbesteuer</span><span class="tax-row-value neg" id="gmbh-gew">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">Abgeltungsteuer 25%</span><span class="tax-row-value neg" id="gmbh-kest">—</span></div>
-        <div class="tax-row"><span class="tax-row-label">SolZ auf Abgeltungsteuer</span><span class="tax-row-value neg" id="gmbh-solz2">—</span></div>
-        <div class="tax-row" style="border-top:1px solid var(--border2);margin-top:4px;padding-top:10px;border-bottom:none;"><span class="tax-row-label" style="color:var(--text)">Netto verbleibend</span><span class="tax-row-value hi" id="gmbh-netto">—</span></div>
+      <div class="field">
+        <label>Hebesatz GewSt <span class="tip"><span class="tip-icon">?</span><span class="tip-text">Ø Deutschland ~400%. Hamburg 470%, München 490%, Berlin 410%, Emden ~380%.</span></span></label>
+        <div class="field-inner">
+          <input type="number" id="hebesatz" value="400" min="200" max="600" step="10">
+          <span class="field-unit">%</span>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Effektive Steuerquote -->
-  <div class="rate-section">
-    <div class="rate-title">Effektive Steuerquote</div>
-    <div class="rate-bars">
-      <div class="rate-bar-row">
-        <div class="rate-bar-label"><span>Einzelunternehmen</span><span id="eu-rate-label" style="color:var(--green)">—</span></div>
-        <div class="rate-bar-track"><div class="rate-bar-fill eu" id="eu-bar" style="width:0%"></div></div>
+      <div class="field slider-field">
+        <label>Gewinn-Schieberegler — <span id="slider-label">120.000 €</span></label>
+        <input type="range" id="gewinn-slider" min="10000" max="1000000" step="5000" value="120000" oninput="syncSlider()">
       </div>
-      <div class="rate-bar-row">
-        <div class="rate-bar-label"><span>GmbH (inkl. Ausschüttung)</span><span id="gmbh-rate-label" style="color:var(--blue)">—</span></div>
-        <div class="rate-bar-track"><div class="rate-bar-fill gmbh" id="gmbh-bar" style="width:0%"></div></div>
+      <div class="field">
+        <label>Kirchensteuer</label>
+        <div class="field-inner">
+          <select id="kirchensteuer">
+            <option value="0">Keine</option>
+            <option value="0.09">9 % (Standard)</option>
+            <option value="0.08">8 % (Bayern / BaWü)</option>
+          </select>
+        </div>
       </div>
-      <div class="rate-bar-row" id="gmbh-thes-row" style="display:none">
-        <div class="rate-bar-label"><span>GmbH (nur Unternehmensebene, thesauriert)</span><span id="gmbh-thes-label" style="color:var(--orange)">—</span></div>
-        <div class="rate-bar-track"><div class="rate-bar-fill" id="gmbh-thes-bar" style="width:0%;background:var(--orange)"></div></div>
+      <div class="field">
+        <label>Thesaurierung GmbH <span class="tip"><span class="tip-icon">?</span><span class="tip-text">Anteil des GmbH-Gewinns der einbehalten wird — erst bei späterer Ausschüttung fällt Abgeltungsteuer an.</span></span></label>
+        <div class="field-inner">
+          <input type="number" id="thesaurierung" value="0" min="0" max="100" step="10">
+          <span class="field-unit">%</span>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Thesaurierungs-Hinweis -->
-  <div class="thes-note" id="thes-note">
-    <strong>Thesaurierungseffekt:</strong> Bei <span id="thes-pct-label">—</span>% Thesaurierung verbleiben <span id="thes-betrag">—</span> pro Jahr in der GmbH und werden nur mit ~30% (KSt + GewSt) besteuert — statt ~48-50% bei sofortiger Ausschüttung. Über <span id="thes-jahre">—</span> Jahre entsteht ein erheblicher Zins- und Reinvestitionseffekt. Die aufgeschobene Abgeltungsteuer wird erst bei späterer Ausschüttung fällig.
-  </div>
-
-  <!-- Mehrjahres-Chart -->
-  <div class="multi-section">
-    <div class="multi-title">Mehrjahres-Analyse: Kumulierte Steuerbelastung</div>
-    <div class="multi-sub" id="multi-sub">Kumulierte Gesamtsteuer über den Betrachtungszeitraum — EU vs. GmbH bei gewählter Thesaurierung</div>
-    <div class="chart-wrap">
-      <div class="chart">
-        <div class="chart-bars" id="chart-bars"></div>
-        <div class="chart-legend">
-          <div class="cleg"><div class="cleg-dot" style="background:var(--green)"></div>Einzelunternehmen</div>
-          <div class="cleg"><div class="cleg-dot" style="background:var(--blue)"></div>GmbH (inkl. Endausschüttung)</div>
+      <div class="field">
+        <label>Betrachtungszeitraum <span class="tip"><span class="tip-icon">?</span><span class="tip-text">Für die Mehrjahres-Analyse: wie viele Jahre werden Gewinne thesauriert?</span></span></label>
+        <div class="field-inner">
+          <input type="number" id="jahre" value="10" min="1" max="30" step="1">
+          <span class="field-unit">Jahre</span>
         </div>
       </div>
     </div>
+    <button class="calc-btn" onclick="calculate()">Steuerbelastung berechnen</button>
   </div>
 
-  <div class="insight">
-    <div class="insight-label">⚡ Einordnung</div>
-    <p id="insight-text">—</p>
+  <!-- RESULTS -->
+  <div id="results">
+
+    <!-- Breakeven -->
+    <div class="card breakeven-card mb16">
+      <div class="be-icon">⚖️</div>
+      <div class="be-body">
+        <div class="be-label">Breakeven-Punkt</div>
+        <div class="be-title" id="be-title">—</div>
+        <div class="be-sub" id="be-sub">—</div>
+      </div>
+      <div class="be-number" id="be-value">—</div>
+    </div>
+
+    <!-- Winner Row -->
+    <div class="winner-row">
+      <div class="winner-label">Ergebnis für <span id="result-label" style="color:var(--gold)">—</span></div>
+      <div class="winner-badge" id="winner-badge">—</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-row mb16">
+      <div class="stat-pill">
+        <div class="stat-pill-label">Ersparnis</div>
+        <div class="stat-pill-value" id="stat-ersparnis">—</div>
+        <div class="stat-pill-sub" id="stat-ersparnis-sub">—</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-label">Differenz Steuerquote</div>
+        <div class="stat-pill-value" id="stat-diff">—</div>
+        <div class="stat-pill-sub">Effektive Rate</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-label">Netto EU</div>
+        <div class="stat-pill-value" id="stat-netto" style="color:var(--green)">—</div>
+        <div class="stat-pill-sub">nach allen Steuern</div>
+      </div>
+    </div>
+
+    <!-- Compare -->
+    <div class="compare-grid mb16">
+      <div class="result-card" id="card-eu">
+        <div class="rc-label">Einzelunternehmen</div>
+        <div class="rc-total eu" id="eu-total">—</div>
+        <div class="rc-sub">Gesamtsteuerbelastung</div>
+        <div class="rc-divider"></div>
+        <div class="rc-row"><span class="rc-row-label">Gewerbesteuer</span><span class="rc-row-value neg" id="eu-gew">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">§ 35 EStG Anrechnung</span><span class="rc-row-value pos" id="eu-anr">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">Einkommensteuer + SolZ</span><span class="rc-row-value neg" id="eu-est">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">Kirchensteuer</span><span class="rc-row-value neg" id="eu-kist">—</span></div>
+        <div class="rc-divider"></div>
+        <div class="rc-row"><span class="rc-row-label">Netto verbleibend</span><span class="rc-row-value hi" id="eu-netto">—</span></div>
+      </div>
+      <div class="result-card" id="card-gmbh">
+        <div class="rc-label">GmbH</div>
+        <div class="rc-total gmbh" id="gmbh-total">—</div>
+        <div class="rc-sub">Gesamtsteuerbelastung</div>
+        <div class="rc-divider"></div>
+        <div class="rc-row"><span class="rc-row-label">Körperschaftsteuer + SolZ</span><span class="rc-row-value neg" id="gmbh-kst">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">Gewerbesteuer</span><span class="rc-row-value neg" id="gmbh-gew">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">Abgeltungsteuer 25%</span><span class="rc-row-value neg" id="gmbh-kest">—</span></div>
+        <div class="rc-row"><span class="rc-row-label">SolZ auf Abgeltungsteuer</span><span class="rc-row-value neg" id="gmbh-solz">—</span></div>
+        <div class="rc-divider"></div>
+        <div class="rc-row"><span class="rc-row-label">Netto verbleibend</span><span class="rc-row-value hi" id="gmbh-netto">—</span></div>
+      </div>
+    </div>
+
+    <!-- Rate Bars -->
+    <div class="card rate-card mb16">
+      <div class="section-label">Effektive Steuerquote</div>
+      <div class="rate-rows">
+        <div class="rate-item">
+          <div class="rate-item-header">
+            <span class="rate-item-name">Einzelunternehmen</span>
+            <span class="rate-item-pct" id="eu-pct" style="color:var(--green)">—</span>
+          </div>
+          <div class="rate-track"><div class="rate-fill eu" id="eu-bar" style="width:0%"></div></div>
+        </div>
+        <div class="rate-item">
+          <div class="rate-item-header">
+            <span class="rate-item-name">GmbH (inkl. Ausschüttung)</span>
+            <span class="rate-item-pct" id="gmbh-pct" style="color:var(--blue)">—</span>
+          </div>
+          <div class="rate-track"><div class="rate-fill gmbh" id="gmbh-bar" style="width:0%"></div></div>
+        </div>
+        <div class="rate-item" id="thes-bar-row" style="display:none">
+          <div class="rate-item-header">
+            <span class="rate-item-name">GmbH (nur Unternehmensebene, thesauriert)</span>
+            <span class="rate-item-pct" id="thes-pct" style="color:var(--orange)">—</span>
+          </div>
+          <div class="rate-track"><div class="rate-fill thes" id="thes-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thes Note -->
+    <div class="thes-note" id="thes-note">
+      <strong>Thesaurierungseffekt:</strong> Bei <span id="tn-pct">—</span> % Thesaurierung verbleiben <span id="tn-betrag">—</span> pro Jahr in der GmbH — besteuert nur mit ~30 % statt ~48–50 % bei sofortiger Ausschüttung. Über <span id="tn-jahre">—</span> Jahre entsteht ein erheblicher Reinvestitionseffekt. Die aufgeschobene Abgeltungsteuer wird erst bei späterer Ausschüttung fällig.
+    </div>
+
+    <!-- Chart -->
+    <div class="card chart-card mb16">
+      <div class="chart-label">Mehrjahres-Analyse</div>
+      <div class="chart-title">Kumulierte Steuerbelastung</div>
+      <div class="chart-sub" id="chart-sub">EU vs. GmbH über den Betrachtungszeitraum</div>
+      <div class="chart-wrap">
+        <div class="chart-inner">
+          <div class="chart-bars" id="chart-bars"></div>
+          <div class="chart-legend">
+            <div class="cleg"><div class="cleg-dot" style="background:var(--green)"></div>Einzelunternehmen</div>
+            <div class="cleg"><div class="cleg-dot" style="background:var(--blue)"></div>GmbH (inkl. Endausschüttung)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight -->
+    <div class="card insight-card mb16">
+      <div class="insight-eyebrow">Steuerliche Einordnung</div>
+      <p class="insight-text" id="insight-text">—</p>
+    </div>
+
+    <div class="disclaimer">Dieser Rechner dient ausschließlich zu Informationszwecken und stellt keine steuerliche Beratung dar. Vereinfachte Annahmen: keine Sonderausgaben, keine außergewöhnlichen Belastungen, Grundtabelle, konstante Gewinne. Rechtsstand: EStG, KStG, GewStG 2026.</div>
   </div>
 
-  <div class="divider"></div>
-  <div class="disclaimer">Hinweis: Dieser Rechner dient ausschließlich zu Informationszwecken und stellt keine steuerliche Beratung dar. Vereinfachte Annahmen: kein Grundfreibetrag-Abzug beim EU, keine Sonderausgaben, keine außergewöhnlichen Belastungen, Grundtabelle, konstante Gewinne über den Betrachtungszeitraum. Rechtsstand: EStG, KStG, GewStG 2026.</div>
-</div>
-
-<footer>
-  <div class="footer-name">Samuel <span>Sluiter</span></div>
-  <div class="footer-tag">HS Emden/Leer · 2026</div>
-</footer>
+  <footer>
+    <div class="footer-name">Samuel <span>Sluiter</span></div>
+    <div class="footer-meta">BWL · Steuerrecht · HS Emden/Leer · 2026</div>
+  </footer>
 </div>
 
 <script>
-function fmt(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);}
-function fmtPct(n){return(n*100).toFixed(1)+' %';}
-function updateSlider(){const v=parseFloat(document.getElementById('gewinn').value)||0;document.getElementById('gewinn-slider').value=Math.min(v,1000000);document.getElementById('slider-label').textContent=fmt(v);}
-function syncSlider(){const v=parseFloat(document.getElementById('gewinn-slider').value);document.getElementById('gewinn').value=v;document.getElementById('slider-label').textContent=fmt(v);}
+const fmt=n=>new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+const pct=n=>(n*100).toFixed(1)+' %';
+const $=id=>document.getElementById(id);
 
-function est(zvE){
-  if(zvE<=11784)return 0;
-  if(zvE<=17005){const y=(zvE-11784)/10000;return Math.round((922.98*y+1400)*y);}
-  if(zvE<=66760){const z=(zvE-17005)/10000;return Math.round((181.19*z+2397)*z+1025.38);}
-  if(zvE<=277825)return Math.round(0.42*zvE-10602.13);
-  return Math.round(0.45*zvE-18936.88);
+function updateSlider(){const v=parseFloat($('gewinn').value)||0;$('gewinn-slider').value=Math.min(v,1e6);$('slider-label').textContent=fmt(v);}
+function syncSlider(){const v=parseFloat($('gewinn-slider').value);$('gewinn').value=v;$('slider-label').textContent=fmt(v);}
+
+function est(z){
+  if(z<=11784)return 0;
+  if(z<=17005){const y=(z-11784)/1e4;return Math.round((922.98*y+1400)*y);}
+  if(z<=66760){const w=(z-17005)/1e4;return Math.round((181.19*w+2397)*w+1025.38);}
+  if(z<=277825)return Math.round(.42*z-10602.13);
+  return Math.round(.45*z-18936.88);
 }
 
-function calcEU(gewinn, hebesatz, kirchenFaktor){
-  const messbetrag=Math.max(0,gewinn-24500)*0.035;
-  const gew=messbetrag*hebesatz;
-  const anrechnung=Math.min(messbetrag*4,gew);
-  const estBrutto=est(gewinn);
-  const estNach=Math.max(0,estBrutto-anrechnung);
-  const solz=estNach>18130?estNach*0.055:0;
-  const estGes=estNach+solz;
-  const kist=estNach*kirchenFaktor;
-  const total=gew+estGes+kist;
-  return{gew,anrechnung,estGes,kist,total,netto:gewinn-total,rate:total/gewinn};
+function calcEU(g,h,k){
+  const mb=Math.max(0,g-24500)*.035,gew=mb*h,anr=Math.min(mb*4,gew);
+  const e0=est(g),e1=Math.max(0,e0-anr),s=e1>18130?e1*.055:0,eG=e1+s,ki=e1*k;
+  const tot=gew+eG+ki;
+  return{gew,anr,eG,ki,tot,netto:g-tot,rate:tot/g};
 }
 
-function calcGmbH(gewinn, hebesatz, thesaurierung){
-  const kst=gewinn*0.15;
-  const solzKst=kst*0.055;
-  const kstGes=kst+solzKst;
-  const gew=gewinn*0.035*hebesatz;
-  const nachSteuern=gewinn-kstGes-gew;
-  const ausschuettung=nachSteuern*(1-thesaurierung);
-  const kest=ausschuettung*0.25;
-  const solzKest=kest*0.055;
-  const kestGes=kest+solzKest;
-  const total=kstGes+gew+kestGes;
-  const rateUnternehmen=(kstGes+gew)/gewinn;
-  return{kstGes,gew,kest,solzKest,kestGes,total,netto:gewinn-total,rate:total/gewinn,rateUnternehmen,thesauriert:nachSteuern*thesaurierung};
+function calcGmbH(g,h,t){
+  const kst=g*.15,sk=kst*.055,kG=kst+sk,gew=g*.035*h;
+  const nach=g-kG-gew,aus=nach*(1-t),ke=aus*.25,sk2=ke*.055,keG=ke+sk2;
+  const tot=kG+gew+keG;
+  return{kG,gew,ke,sk2,keG,tot,netto:g-tot,rate:tot/g,rateU:(kG+gew)/g,thes:nach*t};
 }
 
-function findBreakeven(hebesatz, kirchenFaktor){
-  for(let g=50000;g<=2000000;g+=1000){
-    const eu=calcEU(g,hebesatz,kirchenFaktor);
-    const gmbh=calcGmbH(g,hebesatz,0);
-    if(gmbh.total<eu.total)return g;
-  }
-  return null;
+function findBE(h,k){
+  for(let g=30000;g<=2e6;g+=500){
+    if(calcGmbH(g,h,0).tot<calcEU(g,h,k).tot)return g;
+  }return null;
 }
 
 function calculate(){
-  const gewinn=parseFloat(document.getElementById('gewinn').value)||0;
-  const hebesatz=parseFloat(document.getElementById('hebesatz').value)/100||4;
-  const kirchenFaktor=parseFloat(document.getElementById('kirchensteuer').value)||0;
-  const thesaurierung=parseFloat(document.getElementById('thesaurierung').value)/100||0;
-  const jahre=parseInt(document.getElementById('jahre').value)||10;
-  if(gewinn<=0){alert('Bitte einen Gewinn eingeben.');return;}
+  const g=parseFloat($('gewinn').value)||0,h=parseFloat($('hebesatz').value)/100||4;
+  const k=parseFloat($('kirchensteuer').value)||0,t=parseFloat($('thesaurierung').value)/100||0;
+  const j=parseInt($('jahre').value)||10;
+  if(g<=0){alert('Bitte einen Gewinn eingeben.');return;}
 
-  const eu=calcEU(gewinn,hebesatz,kirchenFaktor);
-  const gmbh=calcGmbH(gewinn,hebesatz,thesaurierung);
-  const euWins=eu.total<=gmbh.total;
-  const ersparnis=Math.abs(eu.total-gmbh.total);
+  const eu=calcEU(g,h,k),gmbh=calcGmbH(g,h,t),euW=eu.tot<=gmbh.tot;
+  const spar=Math.abs(eu.tot-gmbh.tot);
+  const be=findBE(h,k);
 
   // Breakeven
-  const be=findBreakeven(hebesatz,kirchenFaktor);
-  document.getElementById('be-value').textContent=be?fmt(be):'> 2 Mio. €';
-  document.getElementById('be-sub').textContent=be
-    ?`Ab ${fmt(be)} Jahresgewinn wird die GmbH bei vollständiger Ausschüttung günstiger als das Einzelunternehmen`
-    :'Bei diesem Hebesatz ist das EU bei vollständiger Ausschüttung bis 2 Mio. € günstiger';
+  $('be-value').textContent=be?fmt(be):'> 2 Mio. €';
+  $('be-title').textContent=be?`Bei ${fmt(be)} Jahresgewinn wird die GmbH günstiger`:'Das EU bleibt bis 2 Mio. € günstiger';
+  $('be-sub').textContent=be?`Aktueller Gewinn liegt ${g<be?fmt(be-g)+' darunter':fmt(g-be)+' darüber'}`:'Bei diesem Hebesatz';
 
-  // Header
-  document.getElementById('result-gewinn-label').textContent=fmt(gewinn);
-  const badge=document.getElementById('winner-badge');
-  badge.textContent=euWins?'✓ Einzelunternehmen günstiger':'✓ GmbH günstiger';
-  badge.className='winner-badge '+(euWins?'eu':'gmbh');
+  // Winner
+  $('result-label').textContent=fmt(g);
+  const b=$('winner-badge');
+  b.textContent=euW?'✓ Einzelunternehmen günstiger':'✓ GmbH günstiger';
+  b.className='winner-badge '+(euW?'eu':'gmbh');
+
+  // Stats
+  $('stat-ersparnis').textContent=fmt(spar);
+  $('stat-ersparnis-sub').textContent=euW?'Vorteil Einzelunternehmen':'Vorteil GmbH';
+  $('stat-diff').textContent=(Math.abs(eu.rate-gmbh.rate)*100).toFixed(1)+' %';
+  $('stat-netto').textContent=fmt(eu.netto);
 
   // Cards
-  document.getElementById('card-eu').className='card'+(euWins?' winner':'');
-  document.getElementById('card-gmbh').className='card'+(!euWins?' winner':'');
+  $('card-eu').className='result-card'+(euW?' winner':'');
+  $('card-gmbh').className='result-card'+(!euW?' winner':'');
+  $('eu-total').textContent=fmt(eu.tot);
+  $('eu-gew').textContent='− '+fmt(eu.gew);
+  $('eu-anr').textContent='+ '+fmt(eu.anr);
+  $('eu-est').textContent='− '+fmt(eu.eG);
+  $('eu-kist').textContent=k>0?'− '+fmt(eu.ki):'—';
+  $('eu-netto').textContent=fmt(eu.netto);
+  $('gmbh-total').textContent=fmt(gmbh.tot);
+  $('gmbh-kst').textContent='− '+fmt(gmbh.kG);
+  $('gmbh-gew').textContent='− '+fmt(gmbh.gew);
+  $('gmbh-kest').textContent='− '+fmt(gmbh.ke);
+  $('gmbh-solz').textContent='− '+fmt(gmbh.sk2);
+  $('gmbh-netto').textContent=fmt(gmbh.netto);
 
-  // Info
-  document.getElementById('info-ersparnis').textContent=fmt(ersparnis);
-  document.getElementById('info-ersparnis-sub').textContent=(euWins?'Ersparnis mit EU':'Ersparnis mit GmbH');
-  document.getElementById('info-diff-pct').textContent=(Math.abs(eu.rate-gmbh.rate)*100).toFixed(1)+' %';
-  document.getElementById('info-netto-eu').textContent=fmt(eu.netto);
-
-  // EU Card
-  document.getElementById('eu-total').textContent=fmt(eu.total);
-  document.getElementById('eu-gew').textContent='− '+fmt(eu.gew);
-  document.getElementById('eu-anrechnung').textContent='+ '+fmt(eu.anrechnung);
-  document.getElementById('eu-est').textContent='− '+fmt(eu.estGes);
-  document.getElementById('eu-kist').textContent=kirchenFaktor>0?'− '+fmt(eu.kist):'—';
-  document.getElementById('eu-netto').textContent=fmt(eu.netto);
-
-  // GmbH Card
-  document.getElementById('gmbh-total').textContent=fmt(gmbh.total);
-  document.getElementById('gmbh-kst').textContent='− '+fmt(gmbh.kstGes);
-  document.getElementById('gmbh-gew').textContent='− '+fmt(gmbh.gew);
-  document.getElementById('gmbh-kest').textContent='− '+fmt(gmbh.kest);
-  document.getElementById('gmbh-solz2').textContent='− '+fmt(gmbh.solzKest);
-  document.getElementById('gmbh-netto').textContent=fmt(gmbh.netto);
-
-  // Rate bars
-  const maxRate=Math.max(eu.rate,gmbh.rate);
-  document.getElementById('eu-bar').style.width=(eu.rate/maxRate*100)+'%';
-  document.getElementById('gmbh-bar').style.width=(gmbh.rate/maxRate*100)+'%';
-  document.getElementById('eu-rate-label').textContent=fmtPct(eu.rate);
-  document.getElementById('gmbh-rate-label').textContent=fmtPct(gmbh.rate);
-
-  // Thesaurierungs-Bar
-  if(thesaurierung>0){
-    document.getElementById('gmbh-thes-row').style.display='flex';
-    document.getElementById('gmbh-thes-label').textContent=fmtPct(gmbh.rateUnternehmen);
-    document.getElementById('gmbh-thes-bar').style.width=(gmbh.rateUnternehmen/maxRate*100)+'%';
-    document.getElementById('thes-note').className='thes-note show';
-    document.getElementById('thes-pct-label').textContent=(thesaurierung*100).toFixed(0);
-    document.getElementById('thes-betrag').textContent=fmt(gmbh.thesauriert);
-    document.getElementById('thes-jahre').textContent=jahre;
+  // Rates
+  const mx=Math.max(eu.rate,gmbh.rate,gmbh.rateU);
+  $('eu-bar').style.width=(eu.rate/mx*100)+'%';
+  $('gmbh-bar').style.width=(gmbh.rate/mx*100)+'%';
+  $('eu-pct').textContent=pct(eu.rate);
+  $('gmbh-pct').textContent=pct(gmbh.rate);
+  if(t>0){
+    $('thes-bar-row').style.display='flex';
+    $('thes-bar').style.width=(gmbh.rateU/mx*100)+'%';
+    $('thes-pct').textContent=pct(gmbh.rateU);
+    $('thes-note').className='thes-note show';
+    $('tn-pct').textContent=(t*100).toFixed(0);
+    $('tn-betrag').textContent=fmt(gmbh.thes);
+    $('tn-jahre').textContent=j;
   } else {
-    document.getElementById('gmbh-thes-row').style.display='none';
-    document.getElementById('thes-note').className='thes-note';
+    $('thes-bar-row').style.display='none';
+    $('thes-note').className='thes-note';
   }
 
-  // Mehrjahres-Chart
-  buildChart(gewinn,hebesatz,kirchenFaktor,thesaurierung,jahre);
+  // Chart
+  buildChart(g,h,k,t,j);
 
   // Insight
-  let insight='';
-  const beText=be?` Der Breakeven liegt bei <strong>${fmt(be)}</strong>.`:'';
-  if(gewinn<60000){
-    insight=`Bei <strong>${fmt(gewinn)}</strong> Gewinn ist das Einzelunternehmen klar im Vorteil. Die <strong>§ 35 EStG-Anrechnung</strong> neutralisiert die Gewerbesteuer fast vollständig, und der Einkommensteuersatz liegt noch weit unter dem Spitzensteuersatz.${beText} Eine GmbH-Gründung lohnt sich hier in der Regel nicht — die Mehrkosten (Notar, Steuerberater, Bilanzpflicht) übersteigen die Steuerersparnis.`;
-  } else if(gewinn<150000){
-    insight=`Im mittleren Gewinnbereich nähert sich das EU dem Spitzensteuersatz (42%). Die GmbH bleibt bei <strong>vollständiger Ausschüttung</strong> trotzdem teurer — erst durch <strong>Thesaurierung</strong> dreht sich das Bild. Empfehlung: Thesaurierung auf 50–70% setzen und den Mehrjahres-Effekt oben ablesen.${beText}`;
-  } else if(gewinn<300000){
-    insight=`Ab ca. 150.000 € greift der Spitzensteuersatz (42%) beim EU hart. Die GmbH mit Flat-Tax ~30% auf Unternehmensebene wird attraktiv — <strong>besonders mit Thesaurierungsstrategie</strong>. Bei 60–70% Thesaurierung zahlt die GmbH nur ~30% auf den einbehaltenen Gewinn, während das EU 42–45% zahlt.${beText} Die aufgeschobene Abgeltungsteuer macht den Unterschied im Mehrjahres-Vergleich deutlich.`;
-  } else {
-    insight=`Bei <strong>${fmt(gewinn)}</strong> Gewinn greift der Reichensteuersatz (45%) beim EU. Die GmbH mit ~30% Unternehmenssteuer ist strukturell im Vorteil — insbesondere bei Thesaurierung. Das <strong>Teileinkünfteverfahren</strong> (§ 3 Nr. 40 EStG) kann bei hohen Ausschüttungen zusätzlich optimiert werden: 60% der Dividende steuerpflichtig statt 100% Abgeltungsteuer, wenn persönlicher ESt-Satz unter 42% liegt.${beText}`;
-  }
-  if(thesaurierung>0){
-    insight+=` Bei <strong>${(thesaurierung*100).toFixed(0)}% Thesaurierung</strong> verbleiben ${fmt(gmbh.thesauriert)}/Jahr in der GmbH — der Mehrjahres-Chart oben zeigt den kumulierten Vorteil über ${jahre} Jahre.`;
-  }
-  document.getElementById('insight-text').innerHTML=insight;
+  const beT=be?` Der Breakeven-Punkt liegt bei <strong>${fmt(be)}</strong>.`:'';
+  let ins='';
+  if(g<60000)ins=`Bei <strong>${fmt(g)}</strong> ist das Einzelunternehmen klar im Vorteil. Die <strong>§ 35 EStG-Anrechnung</strong> neutralisiert die Gewerbesteuer nahezu vollständig, und der progressive Steuersatz liegt noch weit unter 42 %.${beT} GmbH-Gründungskosten (Notar, laufende Bilanzpflicht) übersteigen die Steuerersparnis bei diesem Gewinn in der Regel.`;
+  else if(g<150000)ins=`Im mittleren Gewinnbereich nähert sich das EU dem <strong>Spitzensteuersatz (42 %)</strong>. Die GmbH bleibt bei vollständiger Ausschüttung trotzdem teurer — erst durch <strong>Thesaurierung (50–70 %)</strong> dreht sich das Bild. Empfehlung: Thesaurierung variieren und den Mehrjahres-Chart beobachten.${beT}`;
+  else if(g<300000)ins=`Ab ca. 150.000 € greift der Spitzensteuersatz (42 %) hart. Die GmbH mit Flat-Tax ~30 % auf Unternehmensebene wird attraktiv — <strong>besonders mit Thesaurierungsstrategie</strong>. Thesaurierung auf 60–70 %: GmbH zahlt nur ~30 % auf einbehaltene Gewinne statt 42–45 % beim EU.${beT}`;
+  else ins=`Bei <strong>${fmt(g)}</strong> greift der <strong>Reichensteuersatz (45 %)</strong> beim EU. Die GmbH mit ~30 % Unternehmenssteuer ist strukturell überlegen. Das <strong>Teileinkünfteverfahren</strong> (§ 3 Nr. 40 EStG) kann bei hohen Ausschüttungen zusätzlich optimiert werden — 60 % der Dividende steuerpflichtig statt 100 % Abgeltungsteuer.${beT}`;
+  if(t>0)ins+=` Bei <strong>${(t*100).toFixed(0)} % Thesaurierung</strong> verbleiben ${fmt(gmbh.thes)}/Jahr in der GmbH — der Chart zeigt den kumulierten Effekt über ${j} Jahre.`;
+  $('insight-text').innerHTML=ins;
 
-  const res=document.getElementById('results');
-  res.classList.add('show');
-  setTimeout(()=>res.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  $('results').classList.add('show');
+  setTimeout(()=>$('results').scrollIntoView({behavior:'smooth',block:'start'}),50);
 }
 
-function buildChart(gewinn,hebesatz,kirchenFaktor,thesaurierung,jahre){
-  const bars=document.getElementById('chart-bars');
-  bars.innerHTML='';
-
-  let cumEU=0, cumGmbh=0, cumGmbhThes=0;
-  const maxJahre=Math.min(jahre,15);
+function buildChart(g,h,k,t,j){
+  const c=$('chart-bars');c.innerHTML='';
+  const n=Math.min(j,15);
+  let cumEU=0,cumG=0;
   const data=[];
-
-  for(let j=1;j<=maxJahre;j++){
-    const eu=calcEU(gewinn,hebesatz,kirchenFaktor);
-    cumEU+=eu.total;
-
-    // GmbH mit Thesaurierung: am Ende des Zeitraums Restausschüttung
-    const gmbhBase=calcGmbH(gewinn,hebesatz,0); // ohne Thes für Jahressteuer
-    const gmbhThes=calcGmbH(gewinn,hebesatz,thesaurierung);
-    cumGmbhThes+=gmbhThes.total;
-
-    // Am letzten Jahr: thesaurierte Beträge ausschütten
-    if(j===maxJahre && thesaurierung>0){
-      const thesGesamt=gmbhThes.thesauriert*maxJahre;
-      const endKest=thesGesamt*0.25*1.055;
-      cumGmbhThes+=endKest;
-    }
-    cumGmbh+=gmbhBase.total;
-    data.push({j,cumEU,cumGmbh:cumGmbhThes});
+  for(let i=1;i<=n;i++){
+    const eu=calcEU(g,h,k),gm=calcGmbH(g,h,t);
+    cumEU+=eu.tot;cumG+=gm.tot;
+    if(i===n&&t>0){const thesG=gm.thes*n,end=thesG*.25*1.055;cumG+=end;}
+    data.push({i,cumEU,cumG});
   }
-
-  const maxVal=Math.max(...data.map(d=>Math.max(d.cumEU,d.cumGmbh)));
-
+  const mx=Math.max(...data.map(d=>Math.max(d.cumEU,d.cumG)));
   data.forEach(d=>{
-    const group=document.createElement('div');
-    group.className='bar-group';
-    const euH=Math.max(4,(d.cumEU/maxVal)*140);
-    const gmbhH=Math.max(4,(d.cumGmbh/maxVal)*140);
-    group.innerHTML=`
-      <div class="bar-pair">
-        <div class="bar eu-bar" style="height:${euH}px" data-tip="EU Jahr ${d.j}: ${fmt(d.cumEU)}"></div>
-        <div class="bar gmbh-bar" style="height:${gmbhH}px" data-tip="GmbH Jahr ${d.j}: ${fmt(d.cumGmbh)}"></div>
-      </div>
-      <div class="bar-label">${d.j}J</div>`;
-    bars.appendChild(group);
+    const gr=document.createElement('div');gr.className='bar-group';
+    const eH=Math.max(4,(d.cumEU/mx)*140),gH=Math.max(4,(d.cumG/mx)*140);
+    gr.innerHTML=`<div class="bar-pair"><div class="bar eu-bar" style="height:${eH}px" data-tip="EU Jahr ${d.i}: ${fmt(d.cumEU)}"></div><div class="bar gmbh-bar" style="height:${gH}px" data-tip="GmbH Jahr ${d.i}: ${fmt(d.cumG)}"></div></div><div class="bar-year">${d.i}J</div>`;
+    c.appendChild(gr);
   });
-
-  document.getElementById('multi-sub').textContent=
-    thesaurierung>0
-      ? `Kumulierte Steuer über ${maxJahre} Jahre — GmbH inkl. Endausschüttung der thesaurierten ${(thesaurierung*100).toFixed(0)}%`
-      : `Kumulierte Steuer über ${maxJahre} Jahre bei vollständiger Ausschüttung`;
+  $('chart-sub').textContent=t>0?`Kumulierte Steuer über ${n} Jahre — GmbH inkl. Endausschüttung der thesaurierten ${(t*100).toFixed(0)} %`:`Kumulierte Steuer über ${n} Jahre bei vollständiger Ausschüttung`;
 }
 
-document.getElementById('slider-label').textContent=fmt(120000);
+$('slider-label').textContent=fmt(120000);
 </script>
 </body>
 </html>
